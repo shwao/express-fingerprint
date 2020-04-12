@@ -12,6 +12,7 @@ const Fingerprint = function (parameters) {
       Fingerprint.acceptHeaders(),
       Fingerprint.geoIp(),
       Fingerprint.ip(),
+      Fingerprint.dnt()
     ];
   }
 

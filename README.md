@@ -29,6 +29,7 @@ app.use(Fingerprint([
 	Fingerprint.acceptHeaders(),
 	Fingerprint.geoIp(),
 	Fingerprint.ip(),
+	Fingerprint.dnt(),
 
 	// Additional parameters
 	function(next) {
@@ -81,6 +82,7 @@ req.fingerprint object is like below.
 			"city": "San Francisco"
 		},
 		"ip": "140.82.112.4",
+		"dnt": true,
 		"param1": "value1",
 		"param2": "value2"
 	}
@@ -94,6 +96,7 @@ req.fingerprint object is like below.
 * HTTP_ACCEPT Headers
 * GEO-IP
 * IP
+* DNT
 
 #### License
 

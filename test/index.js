@@ -14,7 +14,8 @@ beforeEach(function (done) {
     headers: {
       'accept': '*/*',
       'accept-encoding': 'gzip, deflate, br',
-      'accept-language': 'en-US,en;q=0.9,ja-JP;q=0.8,ja;q=0.7'
+      'accept-language': 'en-US,en;q=0.9,ja-JP;q=0.8,ja;q=0.7',
+      'dnt': '1'
     },
     ip: '140.82.112.4'
   });
@@ -56,6 +57,7 @@ it('without option', function (done) {
         }
       },
       ip: v => v === '140.82.112.4',
+      dnt: v => v === true
     }
   });
 
