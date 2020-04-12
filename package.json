@@ -45,7 +45,6 @@
     "babel-runtime": "^6.26.0",
     "mocha": "^6.0.2",
     "node-mocks-http": "^1.7.3",
-    "should": "^13.2.3",
     "superstruct": "^0.6.1"
   }
 }
