@@ -6,7 +6,7 @@ const struct = require('superstruct').struct
 
 let req, res
 
-beforeEach(function(done) {
+beforeEach(function (done) {
   req = httpMocks.createRequest({
     method: 'GET',
     url: '/test/path?myid=312',
@@ -24,7 +24,7 @@ beforeEach(function(done) {
   done()
 })
 
-it('without option', function(done) {
+it('without option', function (done) {
 
   const isValid = struct({
     hash: v => !!v.match(/^\w{32}$/),
@@ -49,17 +49,23 @@ it('without option', function(done) {
         language: v => v === 'en-US,en;q=0.9,ja-JP;q=0.8,ja;q=0.7'
       },
       geoip: {
-        country: v => v === 'US'
+        country: v => v === 'US',
+        region: v => v === '',
+        city: v => v === '',
+        coordinates: {
+          latitude: v => v === 37.751,
+          longitude: v => v === -97.822
+        }
       }
     }
   })
   const middleware = Middleware()
-  middleware(req, res, function(err) {
+  middleware(req, res, function (err) {
     isValid(req.fingerprint)
     done()
   })
 })
-it('custom parameter', function(done) {
+it('custom parameter', function (done) {
 
   const isValid = struct({
     hash: v => !!v.match(/^\w{32}$/),
@@ -71,19 +77,19 @@ it('custom parameter', function(done) {
 
   const middleware = Middleware({
     parameters: [
-      function(next) {
-        next(null,{
-          param1:'value1'
+      function (next) {
+        next(null, {
+          param1: 'value1'
         })
       },
-      function(next) {
-        next(null,{
-          param2:'value2'
+      function (next) {
+        next(null, {
+          param2: 'value2'
         })
       },
     ]
   })
-  middleware(req, res, function(err) {
+  middleware(req, res, function (err) {
     isValid(req.fingerprint)
     done()
   })
