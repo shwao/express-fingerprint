@@ -1,5 +1,8 @@
 # Fingerprint express middleware
 
+### Information
+This is a fork of https://github.com/yusukeshibata/express-fingerprint. I addition to adding a new parameters "IP" and "DNT", this package loads only the parameters you configured. [Yusuke's](https://github.com/yusukeshibata) version loaded all parameters as defaults and therefore loaded the geoip-lite database.
+
 https://w3c.github.io/fingerprinting-guidance/#bib-NDSS-FINGERPRINTING
 > Passive fingerprinting is browser fingerprinting based on characteristics observable in the contents of Web requests, without the use of any code executing on the client side.
 >
@@ -8,49 +11,43 @@ https://w3c.github.io/fingerprinting-guidance/#bib-NDSS-FINGERPRINTING
 Default implementation is `Never trust clients`, So collect only server-side information.
 But you can push additional parameter with initialization config.
 
-### TODO
-Implement this:
-http://research.microsoft.com/pubs/156901/ndss2012.pdf
-
 ### Installation
 
 ```
-npm install express-fingerprint
+npm install @shwao/express-fingerprint
 ```
 ### Usage
 
 #### As a Express middleware
 
 ```javascript
-var Fingerprint = require('express-fingerprint')
+const Fingerprint = require('express-fingerprint');
 
-app.use(Fingerprint({
-	parameters:[
+app.use(Fingerprint([
 		// Defaults
-		Fingerprint.useragent,
-		Fingerprint.acceptHeaders,
-		Fingerprint.geoip,
+	Fingerprint.useragent(),
+	Fingerprint.acceptHeaders(),
+	Fingerprint.geoIp(),
 
-		// Additional parameters
-		function(next) {
-			// ...do something...
-			next(null,{
-			'param1':'value1'
-			})
-		},
-		function(next) {
-			// ...do something...
-			next(null,{
-			'param2':'value2'
-			})
-		},
-	]
-}))
+	// Additional parameters
+	function(next) {
+		// ...do something...
+		next(null,{
+		'param1':'value1'
+		})
+	},
+	function(next) {
+		// ...do something...
+		next(null,{
+		'param2':'value2'
+		})
+	},
+]));
 
 app.get('*',function(req,res,next) {
 	// Fingerprint object
 	console.log(req.fingerprint)
-})
+});
 ```
 
 req.fingerprint object is like below.

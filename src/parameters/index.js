@@ -1,9 +1,5 @@
-import useragent from './useragent'
-import acceptHeaders from './acceptHeaders'
-import geoip from './geoip'
-
 module.exports = {
-  useragent,
-  acceptHeaders,
-  geoip
-}
+  useragent: () => require('./useragent'),
+  acceptHeaders: () => require('./acceptHeaders'),
+  geoIp: () => require('./geoip'),
+};

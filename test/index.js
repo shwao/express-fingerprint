@@ -1,10 +1,8 @@
-const httpMocks = require('node-mocks-http')
-const Middleware = require('..')
-const should = require('should')
-const struct = require('superstruct').struct
+const httpMocks = require('node-mocks-http');
+const Middleware = require('..');
+const struct = require('superstruct').struct;
 
-
-let req, res
+let req, res;
 
 beforeEach(function (done) {
   req = httpMocks.createRequest({
@@ -18,11 +16,11 @@ beforeEach(function (done) {
       'accept-encoding': 'gzip, deflate, br',
       'accept-language': 'en-US,en;q=0.9,ja-JP;q=0.8,ja;q=0.7'
     },
-    ip: '192.30.255.112'
-  })
-  res = httpMocks.createResponse()
-  done()
-})
+    ip: '140.82.112.4'
+  });
+  res = httpMocks.createResponse();
+  done();
+});
 
 it('without option', function (done) {
 
@@ -58,13 +56,16 @@ it('without option', function (done) {
         }
       }
     }
-  })
-  const middleware = Middleware()
+  });
+
+  const middleware = Middleware();
+
   middleware(req, res, function (err) {
-    isValid(req.fingerprint)
-    done()
-  })
-})
+    isValid(req.fingerprint);
+    done();
+  });
+});
+
 it('custom parameter', function (done) {
 
   const isValid = struct({
@@ -73,24 +74,23 @@ it('custom parameter', function (done) {
       param1: v => v === 'value1',
       param2: v => v === 'value2'
     }
-  })
+  });
 
-  const middleware = Middleware({
-    parameters: [
-      function (next) {
-        next(null, {
-          param1: 'value1'
-        })
-      },
-      function (next) {
-        next(null, {
-          param2: 'value2'
-        })
-      },
-    ]
-  })
+  const middleware = Middleware([
+    function (next) {
+      next(null, {
+        param1: 'value1'
+      })
+    },
+    function (next) {
+      next(null, {
+        param2: 'value2'
+      })
+    },
+  ]);
+
   middleware(req, res, function (err) {
-    isValid(req.fingerprint)
-    done()
-  })
-})
+    isValid(req.fingerprint);
+    done();
+  });
+});
