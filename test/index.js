@@ -54,7 +54,8 @@ it('without option', function (done) {
           latitude: v => v === 37.751,
           longitude: v => v === -97.822
         }
-      }
+      },
+      ip: v => v === '140.82.112.4',
     }
   });
 

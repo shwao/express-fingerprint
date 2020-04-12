@@ -28,6 +28,7 @@ app.use(Fingerprint([
 	Fingerprint.useragent(),
 	Fingerprint.acceptHeaders(),
 	Fingerprint.geoIp(),
+	Fingerprint.ip(),
 
 	// Additional parameters
 	function(next) {
@@ -79,6 +80,7 @@ req.fingerprint object is like below.
 			"resion": "CA",
 			"city": "San Francisco"
 		},
+		"ip": "140.82.112.4",
 		"param1": "value1",
 		"param2": "value2"
 	}
@@ -90,7 +92,8 @@ req.fingerprint object is like below.
 
 * User Agent
 * HTTP_ACCEPT Headers
-* GEO-ip
+* GEO-IP
+* IP
 
 #### License
 
