@@ -41,8 +41,8 @@
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/preset-env": "^7.11.5",
-    "mocha": "^7.1.1",
-    "node-mocks-http": "^1.8.1",
-    "superstruct": "^0.8.3"
+    "mocha": "^7.2.0",
+    "node-mocks-http": "^1.9.0",
+    "superstruct": "^0.8.4"
   }
 }
