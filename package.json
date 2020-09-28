@@ -1,6 +1,6 @@
 {
   "name": "@shwao/express-fingerprint",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Client fingerprint server implementation. Fork of https://github.com/yusukeshibata/express-fingerprint. Adds IP and DNT parameter.",
   "main": "lib/index.js",
   "types": "index.d.ts",
